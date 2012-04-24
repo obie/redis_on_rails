@@ -1,6 +1,4 @@
 class Authentication < ActiveRecord::Base
-  include RedisProperties
-
   belongs_to :attendee
 
   def self.authenticate(omniauth)

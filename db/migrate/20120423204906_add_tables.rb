@@ -1,7 +1,7 @@
 class AddTables < ActiveRecord::Migration
   def change
     create_table :attendees, :force => true do |t|
-      t.string :name, null: false
+      t.string :email, null: false
       t.timestamps
     end
 

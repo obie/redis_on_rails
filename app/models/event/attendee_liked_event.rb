@@ -1,0 +1,2 @@
+class AttendeeLikedEvent < Event
+end

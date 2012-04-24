@@ -1,0 +1,2 @@
+class AttendeeRegisteredEvent < Event
+end

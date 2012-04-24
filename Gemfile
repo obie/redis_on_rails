@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
+gem 'decent_exposure'
+gem 'gravtastic', '2.2.0'
 gem 'haml'
 gem 'jquery-rails'
 gem 'json'

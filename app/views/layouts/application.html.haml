@@ -1,0 +1,40 @@
+!!!!
+%html{html_attrs(I18n.locale), class: page_class}
+  %head
+    %title Redis on Rails Example App
+    - if protect_against_forgery?
+      %meta(name='authenticity_token' content=form_authenticity_token)
+    = csrf_meta_tag
+
+    = javascript_include_tag 'jquery.min.js'
+    = javascript_include_tag 'jquery-ui-1.8.17.custom.min.js'
+    = javascript_include_tag 'application'
+
+    = stylesheet_link_tag 'conferences'
+
+  %body
+    #messages
+      - unless flash.empty?
+        - flash.each do |name, msg|
+          - next unless [:alert, :error, :notice].include?(name)
+          %p.flash_message{id: name}
+            = msg
+          %script
+            $('#messages').delay(5000).fadeOut('slow');
+
+    %table
+      %tr
+        %td.header{colspan: 2}
+          - if current_attendee
+            Signed in as #{current_attendee.email}
+            [
+            = link_to 'x', authentications_path, method: 'delete'
+            ]
+          - else
+            = link_to 'Sign in', '/auth/google'
+            using Google
+      %tr.main
+        %td= yield
+        - if current_attendee
+          %td
+            %ul=# render partial: "event", collection: Event.all

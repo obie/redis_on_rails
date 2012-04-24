@@ -1,14 +1,13 @@
 class ApplicationController < ActionController::Base
+  helper_method :attendee_signed_in?, :current_attendee
   protect_from_forgery
 
   def current_attendee
-    Participant.find_by_id(session[:participant_id])
+    Attendee.find_by_id(session[:attendee_id])
   end
 
-  def current_participant=(name)
-    p = Participant.find_by_name(name)
-    session[:participant_id] = p.id
+  def current_attendee=(attendee)
+    session[:attendee_id] = attendee.id
   end
-
 
 end

@@ -1,0 +1,2 @@
+class AttendeeNotesUpdatedEvent < Event
+end

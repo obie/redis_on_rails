@@ -3,11 +3,13 @@ RedisOnRails::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :authentications
+  resource :authentications
   match '/auth/failure' =>'authentications#failure'
   match '/auth/:provider/callback' =>'authentications#create'
 
   resources :conferences
+  resource :notes
+  resource :registrations
 
   root :to => 'conferences#index'
 
