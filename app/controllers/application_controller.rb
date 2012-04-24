@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  def current_participant
+  def current_attendee
     Participant.find_by_id(session[:participant_id])
   end
 

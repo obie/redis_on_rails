@@ -15,14 +15,21 @@ class AddTables < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :speakers, :force => true do |t|
+    create_table :presenters, :force => true do |t|
       t.string :name, null: false
       t.timestamps
     end
 
     create_table :talks, :force => true do |t|
       t.string :name, null: false
-      t.integer :speaker_id, null: false
+      t.integer :presenter_id, null: false
+      t.timestamps
+    end
+
+    create_table :tutorials, :force => true do |t|
+      t.string :name, null: false
+      t.integer :presenter_id, null: false
+      t.integer :max_attendees, null: false, default: 25
       t.timestamps
     end
   end
