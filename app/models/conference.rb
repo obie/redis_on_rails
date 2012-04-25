@@ -5,8 +5,6 @@ class Conference < ActiveRecord::Base
 
   value :location
 
-  attr_accessor :location
-
   def attendees
     # Attendee.find(rdb[:attendee_ids])
     Attendee.find_all_by_id(rdb[:attendee_ids].smembers)
