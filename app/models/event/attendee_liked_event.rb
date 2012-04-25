@@ -1,2 +1,0 @@
-class AttendeeLikedEvent < Event
-end

@@ -6,7 +6,7 @@ class AuthenticationsController < ApplicationController
 
   def destroy
     current_attendee.authentications.first.try(:destroy)
-    current_attendee = nil
+    self.current_attendee = nil
     redirect_to root_url, notice: "Signed out"
   end
 

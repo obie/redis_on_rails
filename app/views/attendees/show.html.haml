@@ -1,5 +1,10 @@
 = image_tag(attendee.gravatar_url, size: "120x120", title: attendee.name)
 %h2= attendee.name
+- if current_attendee
+  - if current_attendee.following? attendee
+    = link_to 'Unfollow', attendee_following_path(attendee), method: "delete"
+  - else
+    = link_to 'Follow', attendee_following_path(attendee), method: "post"
 - attendee.conferences.each do |conference|
   %h4= link_to conference.name, conference_path(conference)
   %pre= conference.notes_for(attendee)

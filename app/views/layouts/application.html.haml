@@ -38,9 +38,8 @@
       %tr.main
         %td
           = yield
-        - if current_attendee
-          %td
-            %ul= render partial: "event", collection: Event.all
+        %td
+          %ul= render partial: "event", collection: events
 
     #footer
       Prepared for RailsConf2012 by

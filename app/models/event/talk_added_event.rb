@@ -1,0 +1,2 @@
+class TalkAddedEvent < Event
+end

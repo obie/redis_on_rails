@@ -1,2 +1,2 @@
-class AttendeeNotesUpdatedEvent < Event
+class AttendeeNotesUpdatedEvent < AttendeeConferenceEvent
 end

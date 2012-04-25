@@ -1,0 +1,2 @@
+class AttendeeUnfollowedEvent < FollowEvent
+end

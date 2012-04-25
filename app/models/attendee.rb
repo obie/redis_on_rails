@@ -1,4 +1,6 @@
 class Attendee < ActiveRecord::Base
+  include Followings
+
   has_many :authentications
 
   is_gravtastic! filetype: :jpg, size: 80
@@ -6,6 +8,16 @@ class Attendee < ActiveRecord::Base
   def conferences
     #Conference.find_all_by_id(rdb[:conference_ids]) # gotcha, didn't call smembers
     Conference.find_all_by_id(rdb[:conference_ids].smembers)
+  end
+
+  def events(other=nil)
+    if other
+      # make a UNION of all events that are shared between you and the conference
+      rdb.redis.zinterstore(rdb[:events][other], [rdb[:events], other.rdb[:events]], aggregate: "min")
+      Event.where(id: rdb[:events][other].zrange(0, Time.now.to_i))
+    else
+      Event.where(id: rdb[:events].zrange(0, Time.now.to_i))
+    end
   end
 
   def name

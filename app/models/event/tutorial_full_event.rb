@@ -1,0 +1,2 @@
+class TutorialFullEvent < Event
+end

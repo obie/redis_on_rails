@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_attendee=(attendee)
-    session[:attendee_id] = attendee.id
+    session[:attendee_id] = attendee.to_param
   end
 
 end

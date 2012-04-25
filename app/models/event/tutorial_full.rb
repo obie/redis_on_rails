@@ -1,2 +1,0 @@
-class AttendeeRegisteredEvent < Event
-end
