@@ -7,6 +7,7 @@ RedisOnRails::Application.routes.draw do
   match '/auth/failure' =>'authentications#failure'
   match '/auth/:provider/callback' =>'authentications#create'
 
+  resources :attendees
   resources :conferences
   resource :notes
   resource :registrations

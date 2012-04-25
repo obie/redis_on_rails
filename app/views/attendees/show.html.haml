@@ -1,0 +1,5 @@
+= image_tag(attendee.gravatar_url, size: "120x120", title: attendee.name)
+%h2= attendee.name
+- attendee.conferences.each do |conference|
+  %h4= link_to conference.name, conference_path(conference)
+  %pre= conference.notes_for(attendee)

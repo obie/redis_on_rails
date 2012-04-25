@@ -1,2 +1,2 @@
-class AttendeeRegisteredEvent < Event
+class AttendeeUnregisteredEvent < Event
 end

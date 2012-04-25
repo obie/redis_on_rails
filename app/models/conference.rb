@@ -1,6 +1,8 @@
 class Conference < ActiveRecord::Base
   include Redis::Objects
 
+  default_scope lambda { order('name asc') }
+  
   value :location
 
   attr_accessor :location
@@ -21,6 +23,8 @@ class Conference < ActiveRecord::Base
 
   def register(attendee)
     rdb[:attendee_ids].sadd(attendee.id)
+    AttendeeRegisteredEvent.create(attendee: attendee,
+     conference: self, description: "#{attendee.name} registered for #{name}")
   end
 
   def registered?(attendee)
@@ -29,6 +33,8 @@ class Conference < ActiveRecord::Base
 
   def unregister(attendee)
     rdb[:attendee_ids].srem(attendee.id)
+    AttendeeUnregisteredEvent.create(attendee: attendee,
+     conference: self, description: "#{attendee.name} unregistered from #{name}")
   end
   
   def notes_for(attendee)
@@ -37,5 +43,11 @@ class Conference < ActiveRecord::Base
   
   def set_notes_for(attendee, text)
     rdb[:notes].hset(attendee.id, text)
+    AttendeeNotesUpdatedEvent.create(attendee: attendee,
+     conference: self, description: "#{attendee.name} updated his notes for #{name}")
+  end
+  
+  def to_s
+    name
   end
 end

@@ -1,8 +1,6 @@
-%h1 Conferences
-%nav Back to #{link_to conferences_path}
 %h2= conference.name
 - if current_attendee
-  - if current_attendee.attending?(conference)
+  - if current_attendee.registered?(conference)
     = link_to 'Unregister', registrations_path(conference_id: conference.id), method: :delete
   - else
     = link_to 'Register', registrations_path(conference_id: conference.id), method: :post
@@ -10,7 +8,7 @@
 %h3 Attendees
 %ul.attendees
   - conference.attendees.each do |a|
-    %li= image_tag(a.gravatar_url, size: "80x80", title: a.name)
+    %li= link_to image_tag(a.gravatar_url, size: "80x80", title: a.name), attendee_path(a)
 
 - if current_attendee
   %h3 My Notes

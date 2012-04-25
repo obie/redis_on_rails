@@ -1,19 +1,25 @@
 class Attendee < ActiveRecord::Base
-  attr_accessor :name
   has_many :authentications
 
   is_gravtastic! filetype: :jpg, size: 80
 
-  def attending?(conference)
-    rdb[:conference_ids].sismember conference.id
+  def conferences
+    #Conference.find_all_by_id(rdb[:conference_ids]) # gotcha, didn't call smembers
+    Conference.find_all_by_id(rdb[:conference_ids].smembers)
   end
 
   def name
+    # won't work with mass-assignment
     rdb[:name].get
   end
 
   def name=(n)
+    # won't work with mass-assignment
     rdb[:name].set n
+  end
+
+  def registered?(conference)
+    rdb[:conference_ids].sismember conference.id
   end
 
   def register_for(conference)

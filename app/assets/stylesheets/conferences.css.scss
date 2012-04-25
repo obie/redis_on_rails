@@ -3,23 +3,41 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
+  background-color: white;
   margin: 20px;
   font-family: Helvetica Neue;
   font-size: 18px;
 }
 
 abbr { display: none }
-h2 { clear: right }
+h1 {
+  border-bottom: 2px solid silver;
+  a { text-decoration: none }
+}
+h2 { margin-top: 0 }
+h3 { clear: right }
 nav { float: right }
-table { width: 100% }
+table {
+  width: 100%
+}
+td {
+  vertical-align: top;
+  &:first-of-type {
+    padding-right: 20px;
+    width: 66%;
+  }
+}
+
 textarea {
   border: 0;
   height: 100%;
   width: 100%;
 }
+.header { text-align: right }
 
 ol, ul {
   list-style-type: none;
+  margin: 0;
   padding: 10px;
   li {
     margin-bottom: 10px;
@@ -27,6 +45,11 @@ ol, ul {
   &.attendees li {
     display: inline-block;
   }
+}
+
+.when {
+  color: green;
+  font-size: 12px;
 }
 
 #messages {
@@ -68,4 +91,19 @@ ol, ul {
   background: #9EBD42;
   border: 5px solid rgba(255, 255, 255, .5);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+#footer {
+  border: 2px solid #789;
+  border-radius: 5px;
+  background-color: #adf;
+  bottom: 20px;
+  font-size: 12px;
+  opacity: .5;
+  padding: 5px;
+  position: fixed;
+  right: 20px;
+  &:hover {
+    opacity: 1;
+  }
 }

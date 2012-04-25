@@ -22,19 +22,28 @@
           %script
             $('#messages').delay(5000).fadeOut('slow');
 
+    .header{colspan: 2}
+      - if current_attendee
+        Signed in as #{current_attendee.email}
+        [
+        = link_to 'x', authentications_path, method: 'delete'
+        ]
+      - else
+        = link_to 'Sign in', '/auth/google'
+        using Google
     %table
       %tr
-        %td.header{colspan: 2}
-          - if current_attendee
-            Signed in as #{current_attendee.email}
-            [
-            = link_to 'x', authentications_path, method: 'delete'
-            ]
-          - else
-            = link_to 'Sign in', '/auth/google'
-            using Google
+        %td{colspan: 2}
+          %h1= link_to "Conferences Sample App", root_path
       %tr.main
-        %td= yield
+        %td
+          = yield
         - if current_attendee
           %td
-            %ul=# render partial: "event", collection: Event.all
+            %ul= render partial: "event", collection: Event.all
+
+    #footer
+      Prepared for RailsConf2012 by
+      = link_to "Obie Fernandez", "http://blog.obiefernandez.com"
+      |
+      = link_to "Source", "https://github.com/obie/redis_on_rails"
