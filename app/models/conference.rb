@@ -1,11 +1,10 @@
 class Conference < ActiveRecord::Base
   include Redis::Objects
+  value :location, marshal: true
 
   default_scope lambda { order('name asc') }
 
-  value :location
-
-  attr_accessor :location
+  #attr_accessor :location
 
   def attendees
     # Attendee.find(rdb[:attendee_ids])
@@ -17,13 +16,13 @@ class Conference < ActiveRecord::Base
     Event.where(id: rdb[:events].zrange(0, Time.now.to_i))
   end
 
-  def location
-    rdb[:location].get
-  end
-
-  def location=(loc)
-    rdb[:location].set loc
-  end
+  # def location
+  #   rdb[:location].get
+  # end
+  # 
+  # def location=(loc)
+  #   rdb[:location].set loc
+  # end
 
   def register(attendee)
     rdb[:attendee_ids].sadd(attendee.id)

@@ -14,9 +14,11 @@ class Attendee < ActiveRecord::Base
     if other
       # make a UNION of all events that are shared between you and the conference
       rdb.redis.zinterstore(rdb[:events][other], [rdb[:events], other.rdb[:events]], aggregate: "min")
-      Event.where(id: rdb[:events][other].zrange(0, Time.now.to_i))
+      # Note that zrange and zrevrange are not score based.. they're 0-index
+      # Event.where(id: rdb[:events][other].zrange(0, Time.now.to_i))
+      Event.where(id: rdb[:events][other].zrange(0, -1))
     else
-      Event.where(id: rdb[:events].zrange(0, Time.now.to_i))
+      Event.where(id: rdb[:events].zrange(0, -1))
     end
   end
 
