@@ -18,7 +18,7 @@ class AttendeeConferenceEvent < Event
   protected
 
   def save_details
-    rdb.hmset(:attendee_id, attendee.id, :conference_id, conference.id)
+    super(attendee_id: attendee.id, conference_id: conference.id)
   end
 
   def push_to_feeds

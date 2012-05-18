@@ -1,6 +1,6 @@
 %h2= conference.name
 - if current_attendee
-  - if current_attendee.registered?(conference)
+  - if current_attendee.registered_for?(conference)
     = link_to 'Unregister', registrations_path(conference_id: conference.id), method: :delete
   - else
     = link_to 'Register', registrations_path(conference_id: conference.id), method: :post

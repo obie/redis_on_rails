@@ -12,6 +12,7 @@ gem 'omniauth-google'
 gem 'omniauth-openid'
 gem 'rails', '3.2.3'
 gem 'redis-objects', :git => 'git://github.com/obie/redis-objects.git'
+gem 'redis_props'
 gem 'sqlite3'
 gem 'thin'
 
@@ -29,4 +30,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'spork'
+end
+
+group :development do
+  gem "rails-erd"
 end

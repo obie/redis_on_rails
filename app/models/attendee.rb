@@ -12,7 +12,7 @@ class Attendee < ActiveRecord::Base
 
   def events(other=nil)
     if other
-      # make a UNION of all events that are shared between you and the conference
+      # make an INTERSECTION of all events that are shared between you and the conference
       rdb.redis.zinterstore(rdb[:events][other], [rdb[:events], other.rdb[:events]], aggregate: "min")
       # Note that zrange and zrevrange are not score based.. they're 0-index
       # Event.where(id: rdb[:events][other].zrange(0, Time.now.to_i))
@@ -32,17 +32,15 @@ class Attendee < ActiveRecord::Base
     rdb[:name].set n
   end
 
-  def registered?(conference)
-    rdb[:conference_ids].sismember conference.id
+  def registered_for?(conference)
+    conference.registered?(self)
   end
 
   def register_for(conference)
-    rdb[:conference_ids].sadd conference.id
     conference.register(self)
   end
 
   def unregister_from(conference)
-    rdb[:conference_ids].srem conference.id
     conference.unregister(self)
   end
 

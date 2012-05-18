@@ -16,9 +16,7 @@ class FollowEvent < Event
   protected
 
   def save_details
-    # gotchas -- make sure your hash keys are what you thought they were
-    rdb.hmset(:follower, follower.id, :following, following.id)
-    rdb.hmset(:follower_id, follower.id, :following_id, following.id)
+    super(follower_id: follower.id, following_id: following.id)
   end
 
   def push_to_feeds

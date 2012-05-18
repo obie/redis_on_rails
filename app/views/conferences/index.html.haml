@@ -4,7 +4,7 @@
       %strong= link_to conf.name, conference_path(conf)
       .location= conf.location
       - if current_attendee
-        - if current_attendee.registered?(conf)
+        - if current_attendee.registered_for?(conf)
           = link_to 'Unregister', registrations_path(conference_id: conf.id), method: :delete
         - else
           = link_to 'Register', registrations_path(conference_id: conf.id), method: :post

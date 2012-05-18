@@ -1,4 +1,9 @@
 class Talk < ActiveRecord::Base
-  include Redis::Objects
+  include RedisProps
 
+  attr_accessible :conference_id, :talk_name
+
+  props "talk" do
+    define :name, default: "Talk Name"
+  end
 end

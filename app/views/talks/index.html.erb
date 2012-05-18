@@ -1,0 +1,21 @@
+<h1>Listing talks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @talks.each do |talk| %>
+  <tr>
+    <td><%= link_to talk.talk_name, talk %></td>
+    <td><%= link_to 'Edit', edit_talk_path(talk) %></td>
+    <td><%= link_to 'Destroy', talk, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Talk', new_talk_path %>

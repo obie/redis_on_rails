@@ -2,7 +2,7 @@ class ConferencesController < ApplicationController
   expose(:conference)
   expose(:events) do
     #current_attendee ? current_attendee.events(conference) : (Conference.events)
-    Event.where(id: $redis.zrange("events", -50, -1))
+    Event.where(id: Redis.current.zrange(:events, -50, -1))
     #Event.all
   end
 
